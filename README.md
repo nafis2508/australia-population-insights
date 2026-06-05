@@ -1,7 +1,6 @@
-```markdown
 # Australian Population Dashboard (1996–2016)
 
-> Interactive Power BI analytics on two decades of Australian Bureau of Statistics (ABS) census data — exploring population growth, gender balance, age structure, and migration patterns across all 8 states and territories.
+> Interactive Power BI analytics on two decades of Australian Bureau of Statistics (ABS) census data.
 
 ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 ![DAX](https://img.shields.io/badge/DAX-Measures-blue)
@@ -31,7 +30,7 @@
 
 ## Overview
 
-This project transforms raw ABS census data (1996–2016) into a three-page interactive Power BI report that surfaces how migration, age, and gender have reshaped Australia's demographics over twenty years. It is designed for policymakers, urban planners, and researchers who need fast, drillable answers to regional and cultural population questions.
+This project transforms raw ABS census data (1996–2016) into a three-page interactive Power BI report.
 
 **Highlights**
 - 5 census years × 8 states/territories × 10 countries of birth
@@ -48,16 +47,17 @@ This project transforms raw ABS census data (1996–2016) into a three-page inte
 
 ## Repository Structure
 
-```
+```text
 .
 ├── dashboard/
-│   └── Visualisations.pbix              # Power BI report
+│   └── Visualisations.pbix          # Power BI report
 ├── data/
-│   ├── raw/                             # Original ABS exports
-│   └── clean/AUS_COB_ABS.csv            # Modelled dataset
+│   ├── raw/                         # Original ABS exports
+│   └── clean/
+│       └── AUS_COB_ABS.csv          # Modelled dataset
 ├── docs/
-│   ├── screenshots/                     # Dashboard previews
-│   ├── data-dictionary.md               # Field definitions
+│   ├── screenshots/                 # Dashboard previews
+│   ├── data-dictionary.md           # Field definitions
 │   └── Report-48312932BusinessAnalyticsProject.pdf
 ├── LICENSE
 └── README.md
@@ -71,7 +71,7 @@ This project transforms raw ABS census data (1996–2016) into a three-page inte
 | **Years** | 1996, 2001, 2006, 2011, 2016 |
 | **Geography** | NSW, VIC, QLD, SA, WA, TAS, NT, ACT |
 | **Dimensions** | Year · State · Gender · Age Group (0–24, 25–64, 65+) · Country of Birth |
-| **Countries of Birth** | Australia, China, Thailand, Singapore, Germany, Ireland, Egypt, Fiji, New Zealand, United States |
+| **Countries of Birth** | Australia, China, Thailand, Singapore, Germany, Ireland, Egypt, Fiji, India, UK |
 | **Primary file** | `data/clean/AUS_COB_ABS.csv` |
 
 See [`docs/data-dictionary.md`](./docs/data-dictionary.md) for field-level definitions.
@@ -87,7 +87,7 @@ See [`docs/data-dictionary.md`](./docs/data-dictionary.md) for field-level defin
 ## Dashboards
 
 ### 1. Total Population Overview by Region
-Line chart of population growth per state · gender split donut · age-group stacked bars · regional totals.
+Line chart of population growth per state · gender split donut · age-group stacked bars · regional KPI cards.
 
 ### 2. Country of Birth Analysis
 Top-10 countries trended over time · share of population donut · age distribution by origin · gender ratio by country.
@@ -100,7 +100,7 @@ AUS vs overseas growth trends · regional migrant breakdown · 100% stacked dive
 - **Steady growth** — total population rose ~8.28% between 1996 and 2016.
 - **Regional dominance** — NSW, VIC, and QLD lead in both size and growth.
 - **Age divergence** — SA and TAS skew older; NSW and VIC carry younger workforces.
-- **Migration shift** — Chinese-born population surged from 2001 onward; Thai migrants skew female, Egyptian migrants skew male.
+- **Migration shift** — Chinese-born population surged from 2001 onward; Thai migrants skew female, Egyptian skew male.
 - **Diversity hotspots** — NSW and VIC are the most culturally diverse; NT and TAS the least.
 
 ## Tech Stack
@@ -117,7 +117,7 @@ AUS vs overseas growth trends · regional migrant breakdown · 100% stacked dive
 **Prerequisites:** [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (latest version)
 
 ```bash
-git clone https://github.com/<your-username>/AustralianPopulationDashboard.git
+git clone https://github.com/nafis2508/AustralianPopulationDashboard.git
 cd AustralianPopulationDashboard
 ```
 
@@ -142,9 +142,8 @@ cd AustralianPopulationDashboard
 
 ## Author
 
-**Muntasir Md Nafis**
-Master of Business Analytics — Macquarie University, NSW
-📧 [md.nafis08@gmail.com](mailto:md.nafis08@gmail.com) · 🔗 [LinkedIn](https://www.linkedin.com/in/muntasir-md-nafis/)
+**Muntasir Md Nafis** — Master of Business Analytics, Macquarie University, NSW
+📧 md.nafis08@gmail.com · 🔗 [LinkedIn](https://www.linkedin.com/in/muntasir-md-nafis/)
 
 ## License
 
@@ -154,5 +153,3 @@ Census data © Commonwealth of Australia (Australian Bureau of Statistics), used
 ---
 
 > If you find this project useful, consider giving it a ⭐ on GitHub.
-```
-
