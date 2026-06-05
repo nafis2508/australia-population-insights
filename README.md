@@ -1,126 +1,158 @@
-🇦🇺 AustralianPopulationDashboard
-Visualizing Australia’s Population Trends (1996–2016) Using Power BI
-📘 Project Overview
+```markdown
+# Australian Population Dashboard (1996–2016)
 
-This project explores how Australia’s population has evolved from 1996 to 2016, focusing on gender distribution, regional growth, age structure, and country of birth. Using Power BI, the project transforms raw census data from the Australian Bureau of Statistics (ABS) into interactive dashboards that reveal demographic trends across states and territories.
+> Interactive Power BI analytics on two decades of Australian Bureau of Statistics (ABS) census data — exploring population growth, gender balance, age structure, and migration patterns across all 8 states and territories.
 
-The analysis highlights how population growth, migration, and diversity vary across regions, providing actionable insights for policymakers, urban planners, and researchers.
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-Measures-blue)
+![Data](https://img.shields.io/badge/Source-ABS%20Census-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 
-🧩 Dataset
+---
 
-Source: Australian Bureau of Statistics (ABS) Census Data
+## Table of Contents
 
-Years Covered: 1996, 2001, 2006, 2011, 2016
+- [Overview](#overview)
+- [Live Preview](#live-preview)
+- [Repository Structure](#repository-structure)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+- [Dashboards](#dashboards)
+- [Key Insights](#key-insights)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Applications](#applications)
+- [Roadmap](#roadmap)
+- [Author](#author)
+- [License](#license)
 
-Geographical Scope: All 8 Australian states and territories
+---
 
-Key Dimensions:
+## Overview
 
-Year
+This project transforms raw ABS census data (1996–2016) into a three-page interactive Power BI report that surfaces how migration, age, and gender have reshaped Australia's demographics over twenty years. It is designed for policymakers, urban planners, and researchers who need fast, drillable answers to regional and cultural population questions.
 
-State/Territory (Region)
+**Highlights**
+- 5 census years × 8 states/territories × 10 countries of birth
+- 3 dashboards, 12+ interactive visuals, custom DAX measures
+- Clean star-schema model for performant slicing and drill-through
 
-Gender
+## Live Preview
 
-Age Group (0–24, 25–64, 65+)
+| | |
+|---|---|
+| Report file | [`dashboard/Visualisations.pbix`](./dashboard/Visualisations.pbix) |
+| Full report (PDF) | [`docs/Report-48312932BusinessAnalyticsProject.pdf`](./docs/Report-48312932BusinessAnalyticsProject.pdf) |
+| Screenshots | [`docs/screenshots/`](./docs/screenshots) |
 
-Country of Birth (Top 10 countries including Australia, China, Thailand, Singapore, Germany, Ireland, Egypt, Fiji, New Zealand, United States)
+## Repository Structure
 
-File Used: AUS_COB_ABS.csv
+```
+.
+├── dashboard/
+│   └── Visualisations.pbix              # Power BI report
+├── data/
+│   ├── raw/                             # Original ABS exports
+│   └── clean/AUS_COB_ABS.csv            # Modelled dataset
+├── docs/
+│   ├── screenshots/                     # Dashboard previews
+│   ├── data-dictionary.md               # Field definitions
+│   └── Report-48312932BusinessAnalyticsProject.pdf
+├── LICENSE
+└── README.md
+```
 
-🧠 Objectives
+## Dataset
 
-Examine long-term population growth across Australian regions.
+| Attribute | Detail |
+|---|---|
+| **Source** | [Australian Bureau of Statistics](https://www.abs.gov.au/) — Census of Population and Housing |
+| **Years** | 1996, 2001, 2006, 2011, 2016 |
+| **Geography** | NSW, VIC, QLD, SA, WA, TAS, NT, ACT |
+| **Dimensions** | Year · State · Gender · Age Group (0–24, 25–64, 65+) · Country of Birth |
+| **Countries of Birth** | Australia, China, Thailand, Singapore, Germany, Ireland, Egypt, Fiji, New Zealand, United States |
+| **Primary file** | `data/clean/AUS_COB_ABS.csv` |
 
-Compare gender balance and age distribution within states.
+See [`docs/data-dictionary.md`](./docs/data-dictionary.md) for field-level definitions.
 
-Analyze migrant population trends by country of birth.
+## Methodology
 
-Identify regional diversity patterns for planning and policy use.
+1. **Ingest** — load ABS CSV exports via Power Query
+2. **Clean** — normalize state codes, harmonize country labels, unpivot year columns
+3. **Model** — star schema: `FactPopulation` joined to `DimYear`, `DimRegion`, `DimAgeGroup`, `DimCountry`
+4. **Measure** — DAX for Growth %, Gender Ratio, AUS vs Overseas split, YoY change
+5. **Visualize** — three themed pages with cross-filtering and drill-through
 
-🛠️ Tools & Techniques
-Tool	Purpose
-Power BI Desktop	Data modelling, dashboard design, and visualization
-DAX Measures	Growth %, Gender Ratio, AUS vs Overseas population
-Excel / CSV Data Import	Dataset cleaning and preparation
-Microsoft Power Query	Data transformation and loading
-📊 Dashboard Structure
-Dashboard 1 – Total Population Overview by Region
+## Dashboards
 
-Line Chart – Population growth by year and state.
+### 1. Total Population Overview by Region
+Line chart of population growth per state · gender split donut · age-group stacked bars · regional totals.
 
-Pie Chart – Gender distribution (≈ 50.4 % male / 49.6 % female).
+### 2. Country of Birth Analysis
+Top-10 countries trended over time · share of population donut · age distribution by origin · gender ratio by country.
 
-Stacked Bar – Age group composition by region.
+### 3. Australian vs Overseas-Born
+AUS vs overseas growth trends · regional migrant breakdown · 100% stacked diversity index by state.
 
-Vertical Bar – Total population comparison by region.
+## Key Insights
 
-Dashboard 2 – Country of Birth Analysis
+- **Steady growth** — total population rose ~8.28% between 1996 and 2016.
+- **Regional dominance** — NSW, VIC, and QLD lead in both size and growth.
+- **Age divergence** — SA and TAS skew older; NSW and VIC carry younger workforces.
+- **Migration shift** — Chinese-born population surged from 2001 onward; Thai migrants skew female, Egyptian migrants skew male.
+- **Diversity hotspots** — NSW and VIC are the most culturally diverse; NT and TAS the least.
 
-Line Chart – Top 10 countries of birth over time (China’s rapid increase since 2001).
+## Tech Stack
 
-Pie Chart – Population share by country (≈ 91 % Australian-born).
+| Layer | Tool |
+|---|---|
+| Modelling & visuals | Power BI Desktop |
+| Transformation | Power Query (M) |
+| Calculations | DAX |
+| Source data | Excel / CSV (ABS) |
 
-Stacked Bar – Age distribution by country of birth.
+## Getting Started
 
-Clustered Bar – Gender ratio by country (Thailand female-dominant, Egypt male-dominant).
+**Prerequisites:** [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (latest version)
 
-Dashboard 3 – Deeper Insights (Australian vs Overseas-Born)
+```bash
+git clone https://github.com/<your-username>/AustralianPopulationDashboard.git
+cd AustralianPopulationDashboard
+```
 
-Line Chart – Australian- vs overseas-born population growth.
+1. Open `dashboard/Visualisations.pbix` in Power BI Desktop
+2. If prompted, point the data source to `data/clean/AUS_COB_ABS.csv`
+3. Click **Refresh** to load the model
+4. Interact via slicers (Year, State, Gender, Country) or drill through to detail pages
 
-Bar Chart – Regional breakdown of migrant presence.
+## Applications
 
-100 % Stacked Bar – Cultural diversity by state (NSW & VIC most diverse).
+- **Urban planning** — anticipate infrastructure demand by region
+- **Health & education** — align services to shifting age structures
+- **Migration policy** — identify under-served regions for balanced settlement
 
-🔍 Key Insights
+## Roadmap
 
-Steady Growth: Australia’s population grew ≈ 8.28 % between 1996 and 2016.
+- [ ] Extend to 2021 and 2026 ABS census releases
+- [ ] Automate refresh via Power BI Service + ABS API
+- [ ] Add forecasting (exponential smoothing / ARIMA) for scenario planning
+- [ ] Embed choropleth maps for spatial migration flows
+- [ ] Publish to Power BI Service with public embed link
 
-Regional Leaders: NSW, VIC, and QLD dominate population size and growth.
+## Author
 
-Age Patterns: SA and TAS have older populations; NSW/VIC younger workforces.
+**Muntasir Md Nafis**
+Master of Business Analytics — Macquarie University, NSW
+📧 [md.nafis08@gmail.com](mailto:md.nafis08@gmail.com) · 🔗 [LinkedIn](https://www.linkedin.com/in/muntasir-md-nafis/)
 
-Migration Trends: China and Thailand show younger migrant profiles; Germany and Egypt older.
+## License
 
-Cultural Diversity: NSW and VIC host the most diverse populations; NT and TAS least.
+Distributed under the MIT License. See [`LICENSE`](./LICENSE) for details.
+Census data © Commonwealth of Australia (Australian Bureau of Statistics), used under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-🌍 Impact & Applications
+---
 
-The project provides data-driven support for:
+> If you find this project useful, consider giving it a ⭐ on GitHub.
+```
 
-Urban Planning & Infrastructure Policy – anticipating population pressures.
-
-Healthcare & Education Services – aligning resources to age structure trends.
-
-Migration Programs – targeting regional areas for balanced growth.
-
-📈 Future Improvements
-
-Extend dataset to 2021 and 2026 ABS Census updates.
-
-Automate data refresh using Power BI Service and API connections.
-
-Incorporate interactive forecasting and dynamic filters for scenario analysis.
-
-Add spatial maps for visual migration flows across regions.
-
-🧾 Author
-
-Muntasir Md Nafis
-Master of Business Analytics | Macquarie University (NSW, Australia)
-📧 md.nafis08@gmail.com
-
-🔗 LinkedIn Profile
-
-📁 Files Included
-
-Visualisations.pbix – Main Power BI dashboard.
-
-AUS_COB_ABS.csv – Cleaned dataset used for visualization.
-
-Report-48312932BusinessAnalyticsProject.pdf – Analytical summary and findings.
-
-🏆 Project Summary
-
-This Power BI dashboard transforms ABS census data into clear, interactive insights on Australia’s population composition. It reveals how migration, age, and gender shape the country’s demographics and shows the value of data-driven storytelling in policy and planning.
